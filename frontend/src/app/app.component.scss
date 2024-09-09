@@ -1,0 +1,101 @@
+.container-fluid {
+    padding: 50px 200px;
+    overflow: hidden;
+    border: 1px solid;
+
+    .user-list {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        height: calc(100vh - 105px);
+        // padding: 10px;
+        overflow-x: hidden;
+
+        .user-chat {
+            padding: 10px 5px;
+            border-bottom: 1px solid #dad5d5;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+
+            .avatar>img {
+                border: 1px solid red;
+                height: 32px;
+                width: 32px;
+                padding: 0;
+                border-radius: 50%;
+            }
+
+            .chat-name {
+                padding-left: 10px;
+            }
+        }
+    }
+
+    .chat-box {
+        background-image: url(./../assets/chat-bg2.jpeg);
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        height: calc(100vh - 105px);
+        position: relative;
+        padding: 0;
+
+        .chat-box-body {
+            height: calc(100vh - 165px);
+            overflow: auto;
+            width: 100%;
+            padding: 7px;
+
+
+            .my-msg {
+                display: flex;
+                justify-content: flex-end;
+
+                .message-container {
+                    background-color: lightskyblue;
+                }
+            }
+
+            .other-msg {}
+
+            .message-container {
+                background-color: #ccccb2;
+                padding: 7px;
+                border-radius: 5px;
+                width: fit-content;
+                max-width: 90%;
+                margin-bottom: 15px;
+            }
+        }
+
+        .chat-box-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #EDEDED;
+            padding: 10px 20px;
+
+            input {
+                width: 100%;
+                border-radius: 5px;
+                height: 100%;
+            }
+        }
+    }
+
+
+    ::-webkit-scrollbar {
+        width: 6pt;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    :hover::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 5pt;
+    }
+}

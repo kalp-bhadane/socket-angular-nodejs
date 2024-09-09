@@ -1,5 +1,37 @@
-<input type="text" [(ngModel)]="message" id="message">
+<div *ngIf="!loginUser.id">
+    <input #loginUser type="text" id="userid" (keyup.enter)="login(loginUser)">
+    <button class="btn btn-primary" (click)="login(loginUser)">Login</button>
+</div>
 
-<button (click)="sendMessage()">Send</button>
 
-{{messages | json}}
+<div *ngIf="loginUser.id" class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 user-list">
+            <div class="user-chat" *ngFor="let user of userList">
+                <div class="avatar">
+                    <img [src]="user.image" [alt]="user.name">
+                </div>
+                <div class="chat-name">{{user.name}}</div>
+            </div>
+        </div>
+
+        <div class="col-md-8 chat-box">
+            <div class="chat-box-header"></div>
+            <div #messageBox class="chat-box-body">
+                <div *ngFor="let msg of messages" [ngClass]="msg.userId == loginUser.id ? 'my-msg' : 'other-msg'">
+                    <p class="message-container">{{msg.message}}</p> 
+                </div>
+            </div>
+            <div class="chat-box-footer">
+                <div class="row">
+                    <div class="col-md-10">
+                        <input #newMessage type="text" id="message" (keyup.enter)="sendMessage(newMessage)">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" (click)="sendMessage(newMessage)">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
