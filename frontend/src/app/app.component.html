@@ -7,7 +7,7 @@
 <div *ngIf="loginUser.id" class="container-fluid">
     <div class="row">
         <div class="col-md-4 user-list">
-            <div class="user-chat" *ngFor="let user of userList">
+            <div *ngFor="let user of userList" (click)="onUserSelect(user)" class="user-chat" [ngClass]="selectedUser.id === user.id ? 'active-room' : ''">
                 <div class="avatar">
                     <img [src]="user.image" [alt]="user.name">
                 </div>
@@ -19,7 +19,7 @@
             <div class="chat-box-header"></div>
             <div #messageBox class="chat-box-body">
                 <div *ngFor="let msg of messages" [ngClass]="msg.userId == loginUser.id ? 'my-msg' : 'other-msg'">
-                    <p class="message-container">{{msg.message}}</p> 
+                    <p class="message-container">{{msg.message}}</p>
                 </div>
             </div>
             <div class="chat-box-footer">
