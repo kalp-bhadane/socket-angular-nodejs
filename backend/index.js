@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');   
- // Replace with your client-side origin
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    // Replace with your client-side origin
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Add allowed headers if needed
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Allowed methods
     next();
@@ -24,12 +24,15 @@ server.listen(port, () => {
 
 io.on('connection', (socket) => {
     console.log(`Socket Connected`);
-    // socket.on('join', (data) => {
-    //     socket.join(data.room);
-    //     socket.broadcast.to(data.room).emit('user joined');
-    // })
+    socket.on('join', (data) => {
+        console.log('join', data);
+        socket.join(data.roomId);
+        socket.broadcast.to(data.roomId).emit('user joined');
+    })
     socket.on('message', (data) => {
-        socket.broadcast.emit('new message', data)
-        // io.in(data.room).emit('new message', { user: data.user, message: data.message });
+        console.log('Message from: ', data);
+        
+        // socket.broadcast.emit('new message', data)
+        io.to(data.roomId).emit('new message', data);
     })
 })
